@@ -66,7 +66,13 @@ class fuzzyLogic:
         self.level_grading.input['age'] = age
         self.level_grading.input['duration'] = duration
 
-        self.level_grading.compute()
+        try:
+            self.level_grading.compute()
+        except:
+            #역퍼지 에러 발생했을 때
+            print('error')
+            self.final_grade = 'F'
+            return self.final_grade
 
         max_val = 0
         for grades in self.level.terms:

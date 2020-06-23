@@ -18,20 +18,19 @@ def create_app(test_config=None):
     app.database = database
 
     # 퍼지 이론 추천 시스템
-    @app.route('/fuzzyRecommend', methods=['POST', 'GET'])
+    @app.route('/fuzzyRecommend', methods=['POST'])
     def getFuzzyRecommendation():
 
-        user_id = request.values.get('user_id')
-        age = request.values.get('age')
-        stay_duration = request.values.get('stay_duration')
+        user_id = request.values.get('user_id') # user id는 문자열임
+        age = int(request.values.get('age'))
+        stay_duration = int(request.values.get('stay_duration'))
 
         interest_id = recommendInterest(getLevel(age, stay_duration))
 
         print(interest_id)
 
         query = """
-                UPDATE user SET interest_id = %s
-                WHERE user_id = %s
+                UPDATE user SET interest_id = %s WHERE user_id = %s
         """
 
         inputData = (interest_id, user_id)

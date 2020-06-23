@@ -16,3 +16,6 @@ def recommendInterest(final_grade):
         return random.choice([1, 2, 4])
     elif final_grade == 'D':
         return 7
+    elif final_grade == 'F':
+        # 역퍼지 오류 났을 때는, 그냥 랜덤으로 추천 띄우기
+        return random.choice([1, 2, 3, 4, 5, 6, 7])
